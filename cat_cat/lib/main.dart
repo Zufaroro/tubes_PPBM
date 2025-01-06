@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 //halo
 //assalamuyalaijkui,
+//fakhri gg
 void main() {
   runApp(const MyApp());
 }
