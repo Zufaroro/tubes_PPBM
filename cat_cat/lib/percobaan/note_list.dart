@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NoteList extends StatefulWidget {
+  const NoteList({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return NoteListState();
@@ -28,7 +30,7 @@ class NoteListState extends State<NoteList> {
   }
 
   ListView getNoteListView() {
-    TextStyle titleStyle = Theme.of(context).textTheme.subhead;
+    TextStyle titleStyle = Theme.of(context).textTheme.headlineSmall!;
 
     return ListView.builder(
       itemCount: count,
