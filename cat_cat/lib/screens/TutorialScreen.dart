@@ -60,13 +60,16 @@ class _TutorialScreenState extends State<TutorialScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  YoutubePlayer(
-                    controller: _controller,
-                    showVideoProgressIndicator: true,
-                    progressIndicatorColor: Colors.red,
-                    onReady: () {
-                      print('Player is ready.');
-                    },
+                  SizedBox(
+                    height: 200, // Adjust this value to change the player's height
+                    child: YoutubePlayer(
+                      controller: _controller,
+                      showVideoProgressIndicator: true,
+                      progressIndicatorColor: Colors.red,
+                      onReady: () {
+                        print('Player is ready.');
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

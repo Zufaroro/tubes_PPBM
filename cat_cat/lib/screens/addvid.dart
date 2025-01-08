@@ -61,13 +61,16 @@ class _AddVidScreenState extends State<AddVidScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  YoutubePlayer(
-                    controller: _controller,
-                    showVideoProgressIndicator: true,
-                    progressIndicatorColor: Colors.red,
-                    onReady: () {
-                      print('Player is ready.');
-                    },
+                  SizedBox(
+                    height: 200, // Adjust this value to resize the player
+                    child: YoutubePlayer(
+                      controller: _controller,
+                      showVideoProgressIndicator: true,
+                      progressIndicatorColor: Colors.red,
+                      onReady: () {
+                        print('Player is ready.');
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

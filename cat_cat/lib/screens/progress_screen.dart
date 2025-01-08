@@ -26,72 +26,100 @@ class ProgressScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFFFDF0E9),
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context); // Go back to the previous screen
+          },
+        ),
         title: Text(
           "Your cat progress",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                offset: Offset(2.0, 2.0), // Horizontal and vertical offset
+                blurRadius: 3.0, // Blur radius
+                color: Colors.grey.withOpacity(0.5), // Shadow color
+              ),
+            ],
+          ),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false, // Align title to the left
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: ListView.builder(
         itemCount: cats.length,
         itemBuilder: (context, index) {
           final cat = cats[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CatDetailScreen(cat: cat),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CatDetailScreen(cat: cat),
+                  ),
+                );
+              },
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
                 ),
-              );
-            },
-            child: Card(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(cat["image"]!),
-                      radius: 40,
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Image.asset(
-                                cat["gender"] == "male" ? 'assets/image/male-gender.png' : 'assets/image/cewe.png',
-                                height: 20,
-                                width: 20,
-                              ),
-                              SizedBox(width: 8),
-                              Text(
-                                cat["name"]!,
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 8),
-                          Text(cat["age"]!, style: TextStyle(fontSize: 16)),
-                          SizedBox(height: 4),
-                          Text(
-                            "BMI: ${cat["bmi"]!}",
-                            style: TextStyle(color: Colors.green, fontSize: 16),
-                          ),
-                        ],
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(cat["image"]!),
+                        radius: 60,
                       ),
-                    ),
-                
-                  ],
+                      SizedBox(width: 32),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  cat["gender"] == "male"
+                                      ? 'assets/image/male-gender.png'
+                                      : 'assets/image/cewe.png',
+                                  height: 28,
+                                  width: 28,
+                                ),
+                                SizedBox(width: 16),
+                                Text(
+                                  cat["name"]!,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              cat["age"]!,
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            SizedBox(height: 12),
+                            Text(
+                              "BMI: ${cat["bmi"]!}",
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

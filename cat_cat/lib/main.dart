@@ -28,6 +28,7 @@ import 'package:flutter/material.dart';
 import 'percobaan/note_list.dart';
 import 'screens/TutorialScreen.dart';
 import 'screens/addvid.dart';
+import 'screens/progress_screen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
       title: 'NoteKeeper',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.amber),
-      home:AddVidScreen()
+      home:ProgressScreen()
     );
   }
 }
