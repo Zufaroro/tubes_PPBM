@@ -63,6 +63,8 @@ flutter:
   assets:
     - assets/video/SplashScreen.mp4
     - assets/image/paws.jpg
+    - assets/image/male-gender.png
+    - assets/image/cewe.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
