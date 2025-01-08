@@ -79,7 +79,6 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         // Handle login action
                       },
-                      child: const Text('Log In'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFF6BD60), // Warna latar belakang tombol
                         padding: const EdgeInsets.symmetric(vertical: 15),
@@ -93,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(30), // Rounded button
                         ),
                       ),
+                      child: const Text('Log In'),
                     ),
                   ),
                   const SizedBox(height: 10),

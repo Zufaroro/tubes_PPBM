@@ -99,7 +99,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       onPressed: () {
                         // Handle sign up action
                       },
-                      child: const Text('Sign Up'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFF6BD60), // Warna latar belakang tombol
                         padding: const EdgeInsets.symmetric(vertical: 15),
@@ -113,6 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           borderRadius: BorderRadius.circular(30), // Rounded button
                         ),
                       ),
+                      child: const Text('Sign Up'),
                     ),
                   ),
                   const SizedBox(height: 10),
