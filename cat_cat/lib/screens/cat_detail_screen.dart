@@ -108,24 +108,21 @@ class CatDetailScreen extends StatelessWidget {
               SizedBox(height: 20),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text("about kuro"),
+                       SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "BMI",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          cat['bmi']!,
-                          style: TextStyle(fontSize: 18, color: Colors.green, fontWeight: FontWeight.bold),
-                        ),
+                      
+                       
+                        
                       ],
                     ),
                     SizedBox(height: 16),
