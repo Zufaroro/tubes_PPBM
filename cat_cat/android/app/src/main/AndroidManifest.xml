@@ -1,6 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.cat_cat">
     <application
-        android:label="cat_cat"
+        android:label="Cat Cat"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
