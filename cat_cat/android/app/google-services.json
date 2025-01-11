@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "865643933285",
+    "project_id": "catcat-databse",
+    "storage_bucket": "catcat-databse.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865643933285:android:f0bf5164d6c627c5fa208c",
+        "android_client_info": {
+          "package_name": "com.example.cat_cat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGkDT9hRO9rEgRcBVE09LNauhXGKpAN5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
