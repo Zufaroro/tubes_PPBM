@@ -28,6 +28,7 @@ import 'package:cat_cat/percobaan/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cat_cat/percobaan/ikhwan_home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 
 late Size mq;
@@ -38,6 +39,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ); // Initialize Firebase
+  Future.delayed(const Duration(seconds: 2), () {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.white, statusBarColor: Colors.white));
+  });
   runApp(const MyApp());
 }
 
@@ -47,6 +53,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Chat dengan Dokter',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(

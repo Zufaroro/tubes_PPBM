@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cat_cat/main.dart';
+import 'package:cat_cat/percobaan/chat_screen.dart';
 import 'package:cat_cat/percobaan/models/chat_user.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,13 @@ class _ChatUserCardState extends State<ChatUserCard> {
 
           //chat button
           trailing: TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              //for navigating to chat screen
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => ChatScreen(user: widget.user)));
+            },
             icon: const Icon(Icons.chat, color: Colors.red),
             label: const Text(
               'chat',
