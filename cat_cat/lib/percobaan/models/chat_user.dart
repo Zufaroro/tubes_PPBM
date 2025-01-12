@@ -9,6 +9,7 @@ class ChatUser {
     required this.lastActive,
     required this.email,
     required this.pushToken,
+    required String password,
   });
   late String image;
   late String name;

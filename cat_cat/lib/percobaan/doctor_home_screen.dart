@@ -9,14 +9,14 @@ import 'package:flutter/services.dart';
 
 import '../main.dart';
 
-class IkhwanHomeScreen extends StatefulWidget {
-  const IkhwanHomeScreen({super.key});
+class DoctorHomeScreen extends StatefulWidget {
+  const DoctorHomeScreen({super.key});
 
   @override
-  State<IkhwanHomeScreen> createState() => _IkhwanHomeScreenState();
+  State<DoctorHomeScreen> createState() => _DoctorHomeScreenState();
 }
 
-class _IkhwanHomeScreenState extends State<IkhwanHomeScreen> {
+class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   //for storing all users
   List<ChatUser> _list = [];
 
@@ -49,10 +49,11 @@ class _IkhwanHomeScreenState extends State<IkhwanHomeScreen> {
           leading: IconButton(
             icon: const Icon(Icons.chevron_left_rounded),
             onPressed: () {
-              Navigator.pop(context);
+              // Navigator.push(
+              //     context, MaterialPageRoute(builder: (_) => CheckoutPage()));
             },
           ),
-          title: Text('Chat dengan Dokter'),
+          title: Text('Chat dengan Pasien'),
           actions: [
             IconButton(
                 onPressed: () {
@@ -142,35 +143,35 @@ class _IkhwanHomeScreenState extends State<IkhwanHomeScreen> {
                       case ConnectionState.active:
                       case ConnectionState.done:
                         final data = snapshot.data?.docs;
+
+                        // Map the data to a list of ChatUser objects and filter by is_online
                         _list = data
                                 ?.map((e) => ChatUser.fromJson(e.data()))
+                                .where((user) =>
+                                    user.isOnline) // Filter only online users
                                 .toList() ??
                             [];
-                        // for (var i in data!) {
-                        //   log('Data: ${jsonEncode(i.data())}');
-                        //   list.add(i.data()['name']);
-                        // }
 
                         if (_list.isNotEmpty) {
                           return ListView.builder(
-                              itemCount: _isSearching
-                                  ? _searchList.length
-                                  : _list.length,
-                              padding: EdgeInsets.only(top: mq.height * .01),
-                              physics: BouncingScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return ChatUserCard(
-                                    user: _isSearching
-                                        ? _searchList[index]
-                                        : _list[index]);
-                                // return Text('Name: ${list[index]}');
-                              });
+                            itemCount: _isSearching
+                                ? _searchList.length
+                                : _list.length,
+                            padding: EdgeInsets.only(top: mq.height * .01),
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              final user = _isSearching
+                                  ? _searchList[index]
+                                  : _list[index];
+                              return ChatUserCard(user: user);
+                            },
+                          );
                         } else {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 80),
                             child: Center(
                               child: Text(
-                                'No Connection Found!',
+                                'No Online Users Found!',
                                 style: TextStyle(fontSize: 20),
                               ),
                             ),

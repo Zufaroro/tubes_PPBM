@@ -7,6 +7,7 @@ import 'package:cat_cat/percobaan/auth/login_screen.dart';
 import 'package:cat_cat/percobaan/ikhwan_home_screen.dart';
 import 'package:cat_cat/percobaan/models/chat_user.dart';
 import 'package:cat_cat/percobaan/widgets/chat_user_card.dart';
+import 'package:cat_cat/screens/login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -40,8 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             leading: IconButton(
               icon: const Icon(Icons.chevron_left_rounded),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => IkhwanHomeScreen()));
+                Navigator.pop(context);
               },
             ),
             title: Text('Profile'),
@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     //replacing the home screen with login screen
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (_) => LoginScreen()));
+                        MaterialPageRoute(builder: (_) => LoginPage()));
                   });
                 });
               },

@@ -1,3 +1,4 @@
+import 'package:cat_cat/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -21,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
         _controller.addListener(() {
           if (_controller.value.position == _controller.value.duration) {
             // Navigate to LoginPage after the video finishes
-            Navigator.pushReplacementNamed(context, '/login');
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => LoginPage()));
           }
         });
       });

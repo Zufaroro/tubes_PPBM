@@ -25,6 +25,10 @@
 // }
 
 import 'package:cat_cat/percobaan/auth/login_screen.dart';
+import 'package:cat_cat/percobaan/check_out.dart';
+import 'package:cat_cat/screens/login_page.dart';
+import 'package:cat_cat/screens/signup_page.dart';
+import 'package:cat_cat/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cat_cat/percobaan/ikhwan_home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -52,6 +56,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    mq = MediaQuery.of(context).size;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Chat dengan Dokter',
@@ -74,7 +80,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 246, 189, 96),
         ),
       ), // AppBar Theme // ThemeData
-      home: const LoginScreen(),
+      home: LoginPage(),
     );
   }
 }

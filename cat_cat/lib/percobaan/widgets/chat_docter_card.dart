@@ -1,21 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cat_cat/main.dart';
 import 'package:cat_cat/percobaan/chat_screen.dart';
-import 'package:cat_cat/percobaan/check_out.dart';
 import 'package:cat_cat/percobaan/models/chat_user.dart';
-import 'package:cat_cat/percobaan/view_pf.dart';
 import 'package:flutter/material.dart';
 
-class ChatUserCard extends StatefulWidget {
+class ChatDoctorCard extends StatefulWidget {
   final ChatUser user;
 
-  const ChatUserCard({super.key, required this.user});
+  const ChatDoctorCard({super.key, required this.user});
 
   @override
-  State<ChatUserCard> createState() => _ChatUserCardState();
+  State<ChatDoctorCard> createState() => _ChatDoctorCardState();
 }
 
-class _ChatUserCardState extends State<ChatUserCard> {
+class _ChatDoctorCardState extends State<ChatDoctorCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -24,12 +22,7 @@ class _ChatUserCardState extends State<ChatUserCard> {
       elevation: 0.5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: InkWell(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (_) => ViewProfileScreen(user: widget.user)));
-        },
+        onTap: () {},
         child: ListTile(
           //user pf picture
           // leading: CircleAvatar(
@@ -43,7 +36,7 @@ class _ChatUserCardState extends State<ChatUserCard> {
               imageUrl: widget.user.image,
               placeholder: (context, url) => CircularProgressIndicator(),
               errorWidget: (context, url, error) => CircleAvatar(
-                  backgroundImage: AssetImage('assets/image/doctor_sml.png')),
+                  backgroundImage: AssetImage('assets/image/man.png')),
             ),
           ),
 
@@ -51,13 +44,13 @@ class _ChatUserCardState extends State<ChatUserCard> {
           title: Text(widget.user.name),
 
           //ratings
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildRatingStars(widget.user.about), // Pass the rating value here
-              const Text('Rp 40.000/ sesi'),
-            ],
-          ),
+          // subtitle: Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     buildRatingStars(widget.user.about), // Pass the rating value here
+          //     const Text('Rp 40.000/ sesi'),
+          //   ],
+          // ),
 
           //chat button
           trailing: TextButton.icon(
@@ -66,7 +59,7 @@ class _ChatUserCardState extends State<ChatUserCard> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => CheckoutPage(user: widget.user)));
+                      builder: (_) => ChatScreen(user: widget.user)));
             },
             icon: const Icon(Icons.chat, color: Colors.red),
             label: const Text(
@@ -80,32 +73,23 @@ class _ChatUserCardState extends State<ChatUserCard> {
   }
 }
 
-Widget buildRatingStars(double rating, {double starSize = 24.0}) {
-  int fullStars = rating.floor(); // Number of full stars
-  bool hasHalfStar =
-      (rating - fullStars) >= 0.5; // Check if there's a half star
-  int emptyStars =
-      5 - fullStars - (hasHalfStar ? 1 : 0); // Remaining empty stars
+// Widget buildRatingStars(double rating) {
+//   int fullStars = rating.floor(); // Number of full stars
+//   bool hasHalfStar =
+//       (rating - fullStars) >= 0.5; // Check if there's a half star
+//   int emptyStars =
+//       5 - fullStars - (hasHalfStar ? 1 : 0); // Remaining empty stars
 
-  return Row(
-    children: [
-      // Full stars
-      for (int i = 0; i < fullStars; i++)
-        Icon(Icons.star, color: Colors.amber, size: starSize),
-      // Half star
-      if (hasHalfStar)
-        Icon(
-          Icons.star_half,
-          color: Colors.amber,
-          size: starSize,
-        ),
-      // Empty stars
-      for (int i = 0; i < emptyStars; i++)
-        Icon(
-          Icons.star_border,
-          color: Colors.amber,
-          size: starSize,
-        ),
-    ],
-  );
-}
+//   return Row(
+//     children: [
+//       // Full stars
+//       for (int i = 0; i < fullStars; i++)
+//         const Icon(Icons.star, color: Colors.amber),
+//       // Half star
+//       if (hasHalfStar) const Icon(Icons.star_half, color: Colors.amber),
+//       // Empty stars
+//       for (int i = 0; i < emptyStars; i++)
+//         const Icon(Icons.star_border, color: Colors.amber),
+//     ],
+//   );
+// }

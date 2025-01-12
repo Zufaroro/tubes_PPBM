@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:cat_cat/percobaan/api/apis.dart';
+import 'package:cat_cat/percobaan/doctor_home_screen.dart';
 import 'package:cat_cat/percobaan/helper/dialogs.dart';
 import 'package:cat_cat/percobaan/ikhwan_home_screen.dart';
+// ignore: unused_import
+import 'package:cat_cat/percobaan/models/chat_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -26,6 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
         log('\nuserAdditionalInfo: ${user.additionalUserInfo}');
 
         if ((await APIs.userExists())) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const DoctorHomeScreen()));
+        } else if ((await APIs.userExists()) && APIs.me.isOnline == false) {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (_) => const IkhwanHomeScreen()));
         } else {
