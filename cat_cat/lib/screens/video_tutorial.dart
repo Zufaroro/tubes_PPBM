@@ -9,18 +9,21 @@ class VideoTutorialPage extends StatelessWidget {
       'title':
           'How to Get your Cat Used to Water (4 Step Tutorial) | The Cat Butler',
       'url': 'https://youtu.be/tcaJgnAm6pk',
-      'thumbnail': 'assets/image/Tumbnail1.png',
+      'thumbnail':
+          'https://firebasestorage.googleapis.com/v0/b/cat-cat-5f7eb.firebasestorage.app/o/images%2FTumbnail1.png?alt=media&token=5f359f86-9193-4793-b3ae-bdea63adba75',
     },
     {
       'title':
           'How to Bathe your Cat that Hates Water (6 Step Tutorial) | The Cat Butler',
       'url': 'https://youtu.be/ORtlZG_RU1s',
-      'thumbnail': 'assets/image/tumbnail2.png',
+      'thumbnail':
+          'https://firebasestorage.googleapis.com/v0/b/cat-cat-5f7eb.firebasestorage.app/o/images%2Ftumbnail2.png?alt=media&token=c148de07-bef8-4f14-a2a8-5ed24a72ff57',
     },
     {
       'title': 'How to wash a Kitten without making it to scared',
       'url': 'https://youtu.be/ymxEmbALjIo',
-      'thumbnail': 'assets/image/tumbnail3.png',
+      'thumbnail':
+          'https://firebasestorage.googleapis.com/v0/b/cat-cat-5f7eb.firebasestorage.app/o/images%2Ftumbnail3.png?alt=media&token=dbd5b8b9-9539-4e13-97cb-6dd21bffd288',
     },
   ];
 

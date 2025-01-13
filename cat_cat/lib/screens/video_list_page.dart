@@ -13,13 +13,17 @@ class _VideoListPageState extends State<VideoListPage> {
   List<Map<String, String>> videoList = [
     {
       'title': 'Sample Video 1',
-      'url': 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
-      'thumbnail': 'https://via.placeholder.com/150',
+      'url':
+          'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+      'thumbnail':
+          'https://firebasestorage.googleapis.com/v0/b/cat-cat-5f7eb.firebasestorage.app/o/images%2FTumbnail1.png?alt=media&token=5f359f86-9193-4793-b3ae-bdea63adba75',
     },
     {
       'title': 'Sample Video 2',
-      'url': 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
-      'thumbnail': 'https://via.placeholder.com/150',
+      'url':
+          'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+      'thumbnail':
+          'https://firebasestorage.googleapis.com/v0/b/cat-cat-5f7eb.firebasestorage.app/o/images%2Ftumbnail2.png?alt=media&token=c148de07-bef8-4f14-a2a8-5ed24a72ff57',
     },
   ];
 
@@ -40,7 +44,8 @@ class _VideoListPageState extends State<VideoListPage> {
         itemBuilder: (context, index) {
           final video = videoList[index];
           return ListTile(
-            leading: Image.network(video['thumbnail']!, width: 100, fit: BoxFit.cover),
+            leading: Image.network(video['thumbnail']!,
+                width: 100, fit: BoxFit.cover),
             title: Text(video['title']!),
             onTap: () {
               Navigator.push(
