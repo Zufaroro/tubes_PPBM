@@ -56,7 +56,7 @@ class APIs {
       lastActive: time,
       email: user.email.toString(),
       pushToken: '',
-      password: '',
+      role: 'human',
     );
 
     return await firestore

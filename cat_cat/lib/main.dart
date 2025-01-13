@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 246, 189, 96),
         ),
       ), // AppBar Theme // ThemeData
-      home: LoginPage(),
+      home: SplashScreen(),
     );
   }
 }

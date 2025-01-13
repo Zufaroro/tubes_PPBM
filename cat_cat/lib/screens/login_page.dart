@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cat_cat/main.dart';
 import 'package:cat_cat/percobaan/doctor_home_screen.dart';
+import 'package:cat_cat/screens/main_screen.dart';
 import 'package:cat_cat/screens/signup_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
       // Jika login berhasil, arahkan ke HomePage
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const MainScreen()),
       );
     } catch (e) {
       // Tangani error jika login gagal
@@ -58,11 +59,11 @@ class _LoginPageState extends State<LoginPage> {
 
         if ((await APIs.userExists())) {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => const HomePage()));
+              context, MaterialPageRoute(builder: (_) => MainScreen()));
         } else {
           APIs.createUser().then((value) => {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (_) => const HomePage()))
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (_) => MainScreen()))
               });
         }
       }

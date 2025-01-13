@@ -2,6 +2,7 @@ import 'package:cat_cat/percobaan/api/apis.dart';
 import 'package:cat_cat/percobaan/check_out.dart';
 import 'package:cat_cat/percobaan/models/chat_user.dart';
 import 'package:cat_cat/percobaan/pf.dart';
+import 'package:cat_cat/percobaan/widgets/chat_docter_card.dart';
 import 'package:cat_cat/percobaan/widgets/chat_user_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,27 +46,27 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
 
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.chevron_left_rounded),
-            onPressed: () {
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (_) => CheckoutPage()));
-            },
-          ),
-          title: Text('Chat dengan Pasien'),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => ProfileScreen(user: APIs.me)));
-                },
-                icon: const Icon(Icons.more_vert))
-          ],
-          backgroundColor: Color.fromARGB(463, 246, 189, 96),
-        ),
+        // appBar: AppBar(
+        //   leading: IconButton(
+        //     icon: const Icon(Icons.chevron_left_rounded),
+        //     onPressed: () {
+        //       // Navigator.push(
+        //       //     context, MaterialPageRoute(builder: (_) => CheckoutPage()));
+        //     },
+        //   ),
+        //   title: Text('Chat dengan Pasien'),
+        //   actions: [
+        //     IconButton(
+        //         onPressed: () {
+        //           Navigator.push(
+        //               context,
+        //               MaterialPageRoute(
+        //                   builder: (_) => ProfileScreen(user: APIs.me)));
+        //         },
+        //         icon: const Icon(Icons.more_vert))
+        //   ],
+        //   backgroundColor: Color.fromARGB(463, 246, 189, 96),
+        // ),
         // floatingActionButton: Padding(
         //   padding: const EdgeInsets.only(bottom: 10),
         //   child: FloatingActionButton(
@@ -117,7 +118,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       }
                     },
                     decoration: InputDecoration(
-                      hintText: 'cari dokter....', // Placeholder text
+                      hintText: 'cari pasien....', // Placeholder text
                       hintStyle:
                           TextStyle(color: Colors.grey), // Hint text style
                       prefixIcon:
@@ -148,7 +149,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         _list = data
                                 ?.map((e) => ChatUser.fromJson(e.data()))
                                 .where((user) =>
-                                    user.isOnline) // Filter only online users
+                                    !user.isOnline) // Filter only online users
                                 .toList() ??
                             [];
 
@@ -163,7 +164,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                               final user = _isSearching
                                   ? _searchList[index]
                                   : _list[index];
-                              return ChatUserCard(user: user);
+                              return ChatDoctorCard(user: user);
                             },
                           );
                         } else {

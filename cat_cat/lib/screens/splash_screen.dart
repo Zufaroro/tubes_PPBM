@@ -1,4 +1,7 @@
 import 'package:cat_cat/screens/login_page.dart';
+import 'package:cat_cat/screens/main_screen.dart';
+import 'package:cat_cat/screens/signup_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -21,9 +24,15 @@ class _SplashScreenState extends State<SplashScreen> {
         _controller.play();
         _controller.addListener(() {
           if (_controller.value.position == _controller.value.duration) {
-            // Navigate to LoginPage after the video finishes
-            Navigator.push(
-                context, MaterialPageRoute(builder: (_) => LoginPage()));
+            if (FirebaseAuth.instance.currentUser != null) {
+              // Navigate to HomePage after the video finishes
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => LoginPage()));
+            } else {
+              // Navigate to LoginPage after the video finishes
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => SignUpPage()));
+            }
           }
         });
       });

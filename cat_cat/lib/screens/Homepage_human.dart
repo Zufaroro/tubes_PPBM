@@ -1,11 +1,15 @@
 import 'package:cat_cat/percobaan/api/apis.dart';
+import 'package:cat_cat/percobaan/doctor_home_screen.dart';
 import 'package:cat_cat/percobaan/ikhwan_home_screen.dart';
 import 'package:cat_cat/percobaan/models/chat_user.dart';
 import 'package:cat_cat/percobaan/pf.dart';
 import 'package:cat_cat/screens/login_page.dart';
+import 'package:cat_cat/screens/progres_page.dart';
+import 'package:cat_cat/screens/tutorial_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     if (user != null) {
       try {
         DocumentSnapshot userDoc = await FirebaseFirestore.instance
-            .collection('users')
+            .collection('user')
             .doc(user.uid)
             .get();
         if (userDoc.exists && userDoc['role'] != null) {
@@ -43,6 +47,14 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPage()));
   }
 
+  // Daftar halaman sesuai dengan item di BottomNavigationBar
+  // final List<Widget> _pages = [
+  //   HomePage(),
+  //   TutorialPage(),
+  //   DoctorHomeScreen(), // Untuk dokter
+  //   ProgressPage(),   // Untuk non-dokter
+  // ];
+
   @override
   void initState() {
     super.initState();
@@ -51,6 +63,7 @@ class _HomePageState extends State<HomePage> {
         _role = role;
       });
     });
+    APIs.getSelfInfo();
   }
 
   Widget _buildBody() {
@@ -225,7 +238,10 @@ class _HomePageState extends State<HomePage> {
                       if (_role == 'doctor')
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pushNamed('/chat');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => DoctorHomeScreen()));
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
@@ -496,52 +512,125 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: const Icon(Icons.logout),
               title: const Text("Keluar"),
-              onTap: () {
+              onTap: () async {
                 signOut(context);
+                await APIs.auth.signOut().then((value) async {
+                  await GoogleSignIn().signOut().then((value) {
+                    //for hiding progress dialog
+                    Navigator.pop(context);
+
+                    //for moving to home screen
+                    Navigator.pop(context);
+
+                    //replacing the home screen with login screen
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) => LoginPage()));
+                  });
+                });
               },
             ),
           ],
         ),
       ),
       body: _buildBody(),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(25),
-          child: BottomNavigationBar(
-            backgroundColor: const Color(0xFFF6BD60),
-            currentIndex: _selectedIndex,
-            onTap: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            items: [
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.home, color: Colors.black),
-                label: 'Home',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.school, color: Colors.black),
-                label: 'Tutorial',
-              ),
-              if (_role == 'doctor')
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.chat, color: Colors.black),
-                  label: 'Chat',
-                )
-              else
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart, color: Colors.black),
-                  label: 'Progress',
-                ),
-            ],
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.black,
-            showUnselectedLabels: true,
-          ),
-        ),
-      ),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.only(bottom: 10),
+      //   child: ClipRRect(
+      //     borderRadius: BorderRadius.circular(25),
+      //     child: BottomNavigationBar(
+      //       backgroundColor: const Color(0xFFF6BD60),
+      //       currentIndex: _selectedIndex,
+      //       onTap: (index) {
+      //         setState(() {
+      //           _selectedIndex = index;
+      //         });
+      //       },
+      //       items: [
+      //         const BottomNavigationBarItem(
+      //           icon: Icon(Icons.home, color: Colors.black),
+      //           label: 'Home',
+      //         ),
+      //         const BottomNavigationBarItem(
+      //           icon: Icon(Icons.school, color: Colors.black),
+      //           label: 'Tutorial',
+      //         ),
+      //         if (_role == 'doctor')
+      //           const BottomNavigationBarItem(
+      //             icon: Icon(Icons.chat, color: Colors.black),
+      //             label: 'Chat',
+      //           )
+      //         else
+      //           const BottomNavigationBarItem(
+      //             icon: Icon(Icons.bar_chart, color: Colors.black),
+      //             label: 'Progress',
+      //           ),
+      //       ],
+      //       selectedItemColor: Colors.black,
+      //       unselectedItemColor: Colors.black,
+      //       showUnselectedLabels: true,
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
+
+// class CustomBottomNavigationBar extends StatefulWidget {
+//   const CustomBottomNavigationBar({super.key});
+
+//   @override
+//   State<CustomBottomNavigationBar> createState() =>
+//       _CustomBottomNavigationBarState();
+// }
+
+// class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+//   int _selectedIndex = 0;
+//   String _role = 'human';
+
+//   final List<Widget> _pages = [HomePage(), TutorialPage(), DoctorHomeScreen()];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: _pages[_selectedIndex], // Tampilkan halaman sesuai indeks
+//       bottomNavigationBar: Padding(
+//         padding: const EdgeInsets.only(bottom: 10),
+//         child: ClipRRect(
+//           borderRadius: BorderRadius.circular(25),
+//           child: BottomNavigationBar(
+//             backgroundColor: const Color(0xFFF6BD60),
+//             currentIndex: _selectedIndex,
+//             onTap: (index) {
+//               setState(() {
+//                 _selectedIndex = index;
+//               });
+//             },
+//             items: [
+//               const BottomNavigationBarItem(
+//                 icon: Icon(Icons.home, color: Colors.black),
+//                 label: 'Home',
+//               ),
+//               const BottomNavigationBarItem(
+//                 icon: Icon(Icons.school, color: Colors.black),
+//                 label: 'Tutorial',
+//               ),
+//               if (_role == 'doctor')
+//                 const BottomNavigationBarItem(
+//                   icon: Icon(Icons.chat, color: Colors.black),
+//                   label: 'Chat',
+//                 )
+//               else
+//                 const BottomNavigationBarItem(
+//                   icon: Icon(Icons.bar_chart, color: Colors.black),
+//                   label: 'Progress',
+//                 ),
+//             ],
+//             selectedItemColor: Colors.black,
+//             unselectedItemColor: Colors.black,
+//             showUnselectedLabels: true,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

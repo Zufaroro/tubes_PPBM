@@ -144,6 +144,8 @@ class _IkhwanHomeScreenState extends State<IkhwanHomeScreen> {
                         final data = snapshot.data?.docs;
                         _list = data
                                 ?.map((e) => ChatUser.fromJson(e.data()))
+                                .where((user) =>
+                                    user.isOnline) // Filter only online users
                                 .toList() ??
                             [];
                         // for (var i in data!) {

@@ -8,6 +8,7 @@ import 'package:cat_cat/percobaan/helper/dialogs.dart';
 import 'package:cat_cat/percobaan/ikhwan_home_screen.dart';
 import 'package:cat_cat/screens/Homepage_human.dart';
 import 'package:cat_cat/screens/login_page.dart';
+import 'package:cat_cat/screens/main_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -85,15 +86,12 @@ class _SignUpPageState extends State<SignUpPage> {
         log('\nuserAdditionalInfo: ${user.additionalUserInfo}');
 
         if ((await APIs.userExists())) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (_) => const DoctorHomeScreen()));
-        } else if ((await APIs.userExists()) && APIs.me.isOnline == false) {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => HomePage()));
+              context, MaterialPageRoute(builder: (_) => const MainScreen()));
         } else {
           APIs.createUser().then((value) => {
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => HomePage()))
+                    context, MaterialPageRoute(builder: (_) => MainScreen()))
               });
         }
       }
