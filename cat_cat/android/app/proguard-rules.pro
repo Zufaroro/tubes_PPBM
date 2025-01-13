@@ -1,0 +1,4 @@
+-keep class android.window.BackEvent { *; }
+-dontwarn android.window.BackEvent
+-keep class io.flutter.view.FlutterView { *; }
+-dontwarn io.flutter.view.FlutterView

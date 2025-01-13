@@ -24,26 +24,63 @@
 //   }
 // }
 
+import 'package:cat_cat/percobaan/auth/login_screen.dart';
+import 'package:cat_cat/percobaan/check_out.dart';
+import 'package:cat_cat/screens/login_page.dart';
+import 'package:cat_cat/screens/signup_page.dart';
+import 'package:cat_cat/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'percobaan/note_list.dart';
-import 'screens/TutorialScreen.dart';
-import 'screens/addvid.dart';
-import 'screens/progress_screen.dart';
-void main() {
+import 'package:cat_cat/percobaan/ikhwan_home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
+import 'firebase_options.dart';
+
+late Size mq;
+
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensure Flutter binding is initialized
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ); // Initialize Firebase
+  Future.delayed(const Duration(seconds: 2), () {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.white, statusBarColor: Colors.white));
+  });
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    mq = MediaQuery.of(context).size;
+
     return MaterialApp(
-      title: 'NoteKeeper',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.amber),
-      home:ProgressScreen()
+      title: 'Chat dengan Dokter',
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          elevation: 1,
+          iconTheme: IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            fontSize: 19,
+            shadows: [
+              Shadow(
+                offset: Offset(2.0, 2.0),
+                color: Colors.grey,
+                blurRadius: 15.0,
+              ),
+            ],
+          ),
+          backgroundColor: Color.fromARGB(255, 246, 189, 96),
+        ),
+      ), // AppBar Theme // ThemeData
+      home: SplashScreen(),
     );
   }
 }
